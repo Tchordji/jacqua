@@ -16,6 +16,10 @@ sudo apt install ros-jazzy-xacro
 sudo apt install ros-jazzy-joint-state-publisher-gui
 sudo apt install gz-harmonic
 sudo apt install twist_stamper
+sudo apt install libraspberrypi-bin
+sudo apt install v4l-utils 
+sudo apt install ros-jazzy-v4l2-camera 
+sudo apt installros-jazzy-image-transport-plugins
 sudo apt install ros-jazzy-ros2-control
 sudo apt install ros-jazzy-ros2-controllers
 sudo apt install ros-jazzy-gz-ros2-control

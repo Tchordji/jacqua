@@ -72,6 +72,26 @@ def generate_launch_description():
         arguments=["/camera/image_raw"]
     )
 
+    diff_drive_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_cont"],
+    )
+
+    joint_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_broad"],
+    )
+
+    twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        parameters=[{'use_sim_time': False}],
+        remappings=[('/cmd_vel_in','cmd_vel'),
+                    ('/cmd_vel_out','/diff_cont/cmd_vel')]
+    )
+
 
 
     # Launch them all!
@@ -80,6 +100,9 @@ def generate_launch_description():
         world_arg,
         gazebo,
         spawn_entity,
+        diff_drive_spawner,
+        joint_broad_spawner,
         ros_gz_bridge,
         ros_gz_image_bridge,
+        twist_stamper,
     ])
