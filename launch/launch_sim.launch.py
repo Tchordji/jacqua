@@ -14,6 +14,8 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
+    use_ros2_control = LaunchConfiguration('use_ros2_control')
+
 
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
     # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
@@ -23,7 +25,7 @@ def generate_launch_description():
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
+                )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': use_ros2_control}.items()
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
@@ -87,7 +89,7 @@ def generate_launch_description():
     twist_stamper = Node(
         package='twist_stamper',
         executable='twist_stamper',
-        parameters=[{'use_sim_time': False}],
+        parameters=[{'use_sim_time': True}],
         remappings=[('/cmd_vel_in','cmd_vel'),
                     ('/cmd_vel_out','/diff_cont/cmd_vel')]
     )
@@ -96,6 +98,10 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'use_ros2_control',
+            default_value='true',
+            description='Use ros2_control if true'),
         rsp,
         world_arg,
         gazebo,
