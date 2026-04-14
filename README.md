@@ -26,3 +26,8 @@ sudo apt install ros-jazzy-gz-ros2-control
 sudo apt install joystick 
 sudo apt install jstest-gtk 
 sudo apt install evtest
+
+
+to launch simulation : 
+ - ros2 launch jacqua launch_sim.launch.py
+ - ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true -p use_sim_time:=true -r cmd_vel:=/diff_cont/cmd_vel
