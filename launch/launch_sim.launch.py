@@ -4,10 +4,10 @@ from ament_index_python.packages import get_package_share_directory
 
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource, AnyLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
+import datetime
 from launch_ros.actions import Node
 
 
@@ -105,6 +105,19 @@ def generate_launch_description():
     )
 
 
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    log_dir = f"log/jaqua_{timestamp}"
+    bag_record = ExecuteProcess(
+        cmd=[
+            'ros2', 'bag', 'record',
+            '-a',
+            '--storage', 'mcap',
+            '-o', log_dir
+        ],
+        output='screen'
+    )
+
+
     # Launch them all!
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -121,4 +134,5 @@ def generate_launch_description():
         ros_gz_image_bridge,
         twist_stamper,
         foxglove_bridge,
+        bag_record,
     ])
