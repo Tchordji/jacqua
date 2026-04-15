@@ -1,0 +1,163 @@
+{
+  "configById": {
+    "3D!18i6zy7": {
+      "layers": {
+        "845139cb-26bc-40b3-8161-8ab60af4baf5": {
+          "visible": true,
+          "frameLocked": true,
+          "label": "Grid",
+          "instanceId": "845139cb-26bc-40b3-8161-8ab60af4baf5",
+          "layerId": "foxglove.Grid",
+          "size": 10,
+          "divisions": 10,
+          "lineWidth": 1,
+          "color": "#248eff",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "order": 1
+        }
+      },
+      "cameraState": {
+        "perspective": true,
+        "distance": 9.265824603180986,
+        "phi": 55.85774058577931,
+        "thetaOffset": 94.33054393305198,
+        "targetOffset": [
+          0.9336626089028279,
+          -0.9180734019681828,
+          -2.814433949793022e-17
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "followTf": "odom",
+      "scene": {
+        "syncCamera": true,
+        "enableStats": false
+      },
+      "transforms": {
+        "frame:odom": {
+          "visible": false
+        },
+        "frame:base_link": {
+          "visible": false
+        },
+        "frame:chassis": {
+          "visible": false
+        },
+        "frame:camera_link": {
+          "visible": false
+        },
+        "frame:camera_link_optical": {
+          "visible": false
+        },
+        "frame:caster_wheel": {
+          "visible": false
+        },
+        "frame:left_wheel": {
+          "visible": false
+        },
+        "frame:right_wheel": {
+          "visible": false
+        }
+      },
+      "topics": {
+        "/camera/camera_info": {
+          "visible": false
+        },
+        "/camera/image_raw": {
+          "visible": true,
+          "frameLocked": true,
+          "cameraInfoTopic": "/camera/camera_info",
+          "distance": 1,
+          "planarProjectionFactor": 0,
+          "color": "#ffffff",
+          "brightness": 50,
+          "contrast": 50
+        },
+        "/camera/image_raw/compressed": {
+          "visible": false
+        },
+        "/camera/image_raw/compressedDepth": {
+          "visible": false
+        },
+        "/camera/image_raw/zstd": {
+          "visible": false
+        },
+        "/robot_description": {
+          "visible": true
+        },
+        "/initialpose": {
+          "visible": false
+        },
+        "/move_base_simple/goal": {
+          "visible": false
+        }
+      },
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {},
+      "lichtblickPanelTitle": "position"
+    },
+    "Teleop!22j0b0f": {
+      "topic": "/cmd_vel",
+      "publishRate": 1,
+      "upButton": {
+        "field": "linear-x",
+        "value": 1
+      },
+      "downButton": {
+        "field": "linear-x",
+        "value": -1
+      },
+      "leftButton": {
+        "field": "angular-z",
+        "value": 1
+      },
+      "rightButton": {
+        "field": "angular-z",
+        "value": -1
+      },
+      "lichtblickPanelTitle": "controller"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": "3D!18i6zy7",
+    "second": "Teleop!22j0b0f",
+    "direction": "row",
+    "splitPercentage": 70
+  }
+}
