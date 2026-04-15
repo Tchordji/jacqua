@@ -5,7 +5,7 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.launch_description_sources import PythonLaunchDescriptionSource, AnyLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
@@ -86,6 +86,24 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
+    twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        parameters=[{'use_sim_time': True}],
+        remappings=[('/cmd_vel_in','cmd_vel'),
+                    ('/cmd_vel_out','/diff_cont/cmd_vel')]
+    )
+
+    foxglove_bridge = IncludeLaunchDescription(
+        AnyLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('foxglove_bridge'),
+                'launch',
+                'foxglove_bridge_launch.xml'
+            )
+        )
+    )
+
 
     # Launch them all!
     return LaunchDescription([
@@ -101,4 +119,6 @@ def generate_launch_description():
         joint_broad_spawner,
         ros_gz_bridge,
         ros_gz_image_bridge,
+        twist_stamper,
+        foxglove_bridge,
     ])
