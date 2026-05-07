@@ -86,11 +86,17 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
+    joystick = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','joystick.launch.py'
+                )]), launch_arguments={'use_sim_time': 'true'}.items()
+    )
+
     twist_stamper = Node(
         package='twist_stamper',
         executable='twist_stamper',
         parameters=[{'use_sim_time': True}],
-        remappings=[('/cmd_vel_in','cmd_vel'),
+        remappings=[('/cmd_vel_in','/diff_cont/cmd_vel_unstamped'),
                     ('/cmd_vel_out','/diff_cont/cmd_vel')]
     )
 
@@ -125,6 +131,7 @@ def generate_launch_description():
             default_value='true',
             description='Use ros2_control if true'),
         rsp,
+        joystick,
         world_arg,
         gazebo,
         spawn_entity,
