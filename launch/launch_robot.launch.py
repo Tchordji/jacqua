@@ -117,12 +117,12 @@ def generate_launch_description():
             'use_ros2_control',
             default_value='true',
             description='Use ros2_control if true'),
+        bag_record,
         rsp,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner,
         twist_stamper,
         foxglove_bridge,
-        bag_record,
         camera,
     ])
